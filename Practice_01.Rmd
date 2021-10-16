@@ -1,0 +1,62 @@
+---
+title: "Practice_01"
+author: "WuJuHsiung"
+date: "2021/10/16"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Setup the packages
+```{r}
+library(dplyr)
+library(tidyr)
+```
+
+# Get the data set
+```{r}
+Raiouoho <- read.table("https://www.dipintothereef.com/uploads/3/7/3/5/37359245/rairuoho.txt", sep = "\t", dec = ".")
+head(Raiouoho)
+```
+
+# Rename the column
+```{r}
+colnames(Raiouoho) <- c("day3", "day4", "day5", "day6", "day7", "day8", "germinate", 
+                        "bed", "treatment", "spatial1", "spatial2", "row", "column")
+Raiouoho <- Raiouoho[-1, ]
+head(Raiouoho)
+```
+
+# Replace nutrient with enriched in the dataset
+```{r}
+Raiouoho$treatment <- ifelse(Raiouoho$treatment == "nutrient", "enriched", "water")
+head(Raiouoho)
+```
+
+# Reformat the table in order to have the day as a single variable
+```{r}
+Raiouoho_long <- pivot_longer(Raiouoho, day3:day8, names_to = "day", values_to = "length")
+head(Raiouoho_long)
+```
+
+# Merge variables spatial1 and spatial2
+```{r}
+Raiouoho_long <- Raiouoho_long %>% unite("spatial", spatial1, spatial2, sep = "_", remove = TRUE)
+head(Raiouoho_long)
+```
+
+# Remove variables row and column
+```{r}
+Raiouoho_temp <- Raiouoho_long[,-c(5, 6)]
+head(Raiouoho_temp)
+```
+
+# Rearrange
+```{r}
+## The column
+Raiouoho_final <- Raiouoho_temp[, c(5, 6, 1, 2, 3, 4)]
+
+## The row
+Raiouoho_final <- arrange(Raiouoho_final, day)
+head(Raiouoho_final)
+```
