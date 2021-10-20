@@ -1,0 +1,47 @@
+---
+title: "Practice_02"
+author: "WuJuHsiung"
+date: "2021/10/20"
+output: html_document
+---
+
+# Setup the packages
+```{r}
+library(tidyr)
+```
+
+# Creat the data
+```{r}
+before_diet <- c(104, 95, 87, 77, 112)
+after_diet <- c(96, 91, 81, 75, 118)
+DATA <- data.frame(before_diet, after_diet)
+rownames(DATA) <- c("subject_1", "subject_2", "subject_3", 
+                    "subject_4", "subject_5")
+DATA
+str(DATA)
+```
+
+# Reformat the data frame
+```{r}
+DATA_re <- pivot_longer(DATA, before_diet:after_diet, names_to = "time", values_to = "weight")
+head(DATA_re, 3)
+str(DATA_re)
+```
+
+# Creat WEIGHT_LOSS
+```{r}
+One_WL <- c(rownames(DATA))
+Two_WL <- c(as.double((DATA$after_diet - DATA$before_diet) 
+                      / DATA$before_diet * 100, "%"))
+Three_WL <- data.frame(subject = One_WL, weight_loss = Two_WL)
+WEIGHT_LOSS <- list(One = One_WL, Two = Two_WL, Three = Three_WL)
+str(WEIGHT_LOSS)
+```
+
+# Store in BUBBLE_DIET
+```{r}
+One_BD <- data.frame(DATA_re)
+Two_BD <- WEIGHT_LOSS
+BUBBLE_DIET <- list(First = One_BD, Second = Two_BD)
+str(BUBBLE_DIET)
+```
