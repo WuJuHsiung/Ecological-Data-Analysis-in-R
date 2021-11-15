@@ -1,0 +1,44 @@
+---
+title: "Midterm Report"
+author: "Tang Chi-Ngai, Wu Ju-Hsiung"
+date: "2021/11/15"
+output: html_document
+---
+
+
+## Examine morphological differences of fishes for taxonomical purpose by R
+
+Students:  
+Tang, Chi-Ngai	R10241214  
+Wu, Ju-Hsiung   R10241210
+
+
+### Objective
+
+By R programming language and the necessary packages, to prove whether specimens of three fish species from the same genus are really different, morphologically. It is wished to do by generating some scattered plots, distribution plots, PCA plots, etc.
+
+
+### Introduction
+
+In the study of fish taxonomy, examining morphological characters (e.g., meristic counts, morphometric proportions) are necessary and essential to understand interspecific or intraspecific differences of fish specimens. Fish taxonomists always work hard to measure and count the morphometric character of specimens, probably to discover new species by discovering their obvious differences. There are many ways to tell whether one species is different from another. Sometimes, in ideal cases, a single different count (e.g., fin-element count) is already sufficient to distinguish species. However, there are always exceptions, and complicated cases. The most common case to cause confusion are the overlapping counts (e.g., one “species” is 35‒38, another is 37‒40), it will be hard to tell whether it’s different by just comparing the range of data, without considering the distribution pattern of counts, or ontogenetic changes. Actually, simple statistical methods can easily figure out and visualized these differences.  
+In our present work, we adopted programming approaches to manipulate and visualize the morphometric data of three species, by distribution plots, PCA analysis, etc, to produce fancy data to convince others the fishes are different, especially to editors and reviewer after the manuscript was submitted.
+
+
+### Materials and Methods
+
+1. *Data sources*  
+Morphometric and meristic data of three species are unpublished, part of it were obtained by CN Tang and others were donated from his former collaborator. Due to the reason that still unpublished, the three species will just be abbreviated as A, B and C. An example dataset (only small part of data are included) as shown below.
+
+```{r}
+library(readxl)
+Example_Dataset <- read_excel("D:/R/Ecological Data Analysis in R/Midterm Report/Example Dataset.xlsx")
+Example_Dataset
+```
+
+2. *Data manipulation*  
+Original datasets were stored in Microsoft excel file. Dataset formatting and manipulation will be done in RStudio (RStudio Team, 2015). Data of selected morphological data is to produce simple scattered plots (length/count of a morphological character vs. standard length) and discuss individually. And finally, plot of PCA analyses is wished to make, and as wished this technique will learn from the coming classes.
+
+
+### Reference
+
+1.	RStudio Team (2015) RStudio: Integrated Development for R. RStudio, PBC, Boston, Massachusetts. Available from: https://www.rstudio.com/
