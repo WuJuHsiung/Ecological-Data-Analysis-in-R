@@ -1,0 +1,78 @@
+---
+title: "Practice_03"
+author: "WuJuHsiung"
+date: "2021/11/22"
+output: html_document
+---
+
+# Setup the packages
+```{r}
+library(rgdal)
+library(leaflet)
+```
+
+# Get the map data
+```{r}
+Taiwan <- readOGR("D:/R/Ecological Data Analysis in R/Sample Data/20211109_Taiwan/COUNTY_MOI_1090820.shp", 
+                  use_iconv = TRUE, encoding = 'UTF-8')
+```
+
+# Hot Spring Hotels
+```{r}
+HRCT <- paste(sep = "<br/>", 
+             "<b><a href = 'https://www.hotelroyal.com.tw/en-us/chihpen'> 
+             Hotel Royal Chihpen </a></b>", 
+             "Five-star hotel", 
+             "Benian Township,Taitung County")
+
+HRCY <- paste(sep = "<br/>", 
+             "<b><a href = 'https://www.hotelroyal.com.tw/en-us/chiaohsi'> 
+             Hotel Royal Chiaohsi </a></b>", 
+             "Five-star hotel", 
+             "Jiaoxi Township, Yilan County")
+
+SRP <- paste(sep = "<br/>", 
+              "<b><a href = 'https://www.facebook.com/SolasResort/'> 
+             The Solasresort Hot Spring Hotel </a></b>", 
+              "Three-star hotel", 
+              "Puli Township, Nantou County", 
+              "**(Temporarily closed)**")
+
+OPT <- paste(sep = "<br/>", 
+           "<b><a href = 'https://order.papawaqa.com.tw/'> 
+             Onsen Papawaqa </a></b>", 
+           "Four-star hotel", 
+           "Taian Township, Miaoli County")
+
+TYT <- paste(sep = "<br/>", 
+            "<b><a href = 'https://www.tangyue.com.tw/'> 
+             Tangyue </a></b>", 
+            "Three-star hotel", 
+            "Taian Township, Miaoli County")
+
+RXR <- paste(sep = "<br/>", 
+             "<b><a href = 'https://ruixiong.hlbnb.net/'> 
+             RuiXiong HotSpring </a></b>", 
+             "Three-star hotel", 
+             "Ruisui Township, Hualien County")
+
+MDC <- paste(sep = "<br/>", 
+             "<b><a href = 'https://www.themudan.com/'> 
+             THE MUDAN </a></b>", 
+             "Three-star hotel", 
+             "Checheng Township, Pingtung County")
+```
+
+# Creat the map of **Hot Spring Hotels**
+```{r}
+leaflet(Taiwan) %>% 
+  addPolygons(weight = 0.5) %>% 
+  addTiles(group = "Kort") %>% 
+  addMarkers(lng = 121.00687, lat = 22.69202, popup = HRCT) %>% 
+  addMarkers(lng = 121.75556, lat = 24.82835, popup = HRCY) %>% 
+  addMarkers(lng = 120.99902, lat = 23.95952, popup = SRP) %>% 
+  addMarkers(lng = 120.95186, lat = 24.46793, popup = OPT) %>% 
+  addMarkers(lng = 120.96947, lat = 24.47009, popup = TYT) %>% 
+  addMarkers(lng = 121.34678, lat = 23.49525, popup = RXR) %>% 
+  addMarkers(lng = 120.74925, lat = 22.09776, popup = MDC)
+```
